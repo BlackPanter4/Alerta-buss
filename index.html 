@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AlertaBus CJ - Demo Ruta 1B</title>
+<style>
+body{font-family: sans-serif; background:#f4f7ff; padding:20px}
+.card{background:white; border-radius:16px; padding:20px; max-width:380px; margin:auto; box-shadow:0 4px 20px rgba(0,0,0,.1)}
+.btn{background:#0d6efd; color:white; border:none; width:100%; padding:14px; border-radius:10px; font-size:16px; font-weight:bold; margin-top:10px}
+.alert{background:#d1e7ff; border-left:5px solid #0d6efd; padding:12px; border-radius:8px; margin-top:15px; display:none}
+</style>
+</head>
+<body>
+<div class="card">
+<h2>🚌 AlertaBus CJ - DEMO</h2>
+<p>Selecciona tu parada de la Ruta 1B Express</p>
+<select id="parada" style="width:100%; padding:12px; border-radius:8px">
+<option>Parada Centro - Catedral</option>
+<option>Parada Tecnológico - Av. Tecnológico</option>
+<option>Parada Waterfill - Maquila</option>
+</select>
+<input id="tel" type="tel" placeholder="Tu WhatsApp 656..." style="width:100%; padding:12px; border-radius:8px; margin-top:10px; box-sizing:border-box">
+<button class="btn" onclick="activar()">Activar alerta 15 min antes</button>
+<div id="msg" class="alert"></div>
+<p style="font-size:12px; color:gray; margin-top:15px">Base de datos: horarios_ruta_1B | Demo para clientes de transporte</p>
+</div>
+<script>
+function activar(){
+ let p=document.getElementById('parada').value;
+ let tel=document.getElementById('tel').value;
+ if(tel.length<10){alert('Pon tu WhatsApp'); return}
+ let m=document.getElementById('msg');
+ m.style.display='block';
+ m.innerHTML = `✅ Listo! Alerta activa para <b>${p}</b><br><br>🔔 Te llegará a <b>${tel}</b> así:<br><i>"Tu Ruta 1B Express está a 15 minutos de llegar a ${p}"</i><br><br><small>Simulación: Próximo camión 8:00 AM → Alerta a las 7:45 AM</small>`;
+ // Aquí conectarías a n8n / WhatsApp API
+ console.log(`DB INSERT: usuario ${tel} suscrito a ${p} - 15min`);
+}
+</script>
+</body>
+</html>
